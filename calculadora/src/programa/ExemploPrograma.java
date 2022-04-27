@@ -1,53 +1,147 @@
 package programa;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
 
-import interfaces.ICalculadora;
+import classes.multiplicacao;
+import classes.Soma;
+import classes.Subtracao;
+import isoma.ICalculadora; 
 
-public class ExemploPrograma {	
+
+public class ExemploPrograma {
 	
 	public static void main(String args[]) {
-				
+		
 		Integer opc = 0;
 		do {
 			opc = menu();
+			
 			ArrayList<Double> entrada = menuEntradaDados();
+			
+			Double data[] = new Double[entrada.size()];
+			
+			for (int i = 0; i < entrada.size(); i++) {
+				data[i] = entrada.get(i);
+			}
+			
+			String tipoEntrada = verificaTipoEntrada(data);	
 			
 			switch (opc) {
 			case 1:
-				Double data[] = new Double[entrada.size()];
+				ICalculadora soma = new Soma();
 				
-				for (int i = 0; i < entrada.size(); i++) {
-					data[i] = entrada.get(i);
+				if(tipoEntrada.equals("inteiro")) {
+					if(entrada.size() <= 2) {
+						System.out.println(soma.calcula(convertDoubleToIntWithOutArray(data[0]), convertDoubleToIntWithOutArray(data[1])));
+					}
+					else {
+						System.out.println(soma.calcula(convertDoubleToInt(data)));
+					}
 				}
-				
-				System.out.println(verificaTipoEntrada(data));				
-				
-				Divisao d1 = new Divisao();
-				System.out.println(d1.calcula(data));
+				if(tipoEntrada.equals("double")) {
+					if(entrada.size() <= 2) {
+						System.out.println(soma.calcula(data[0], data[1]));
+					}
+					else {
+					 System.out.println(soma.calcula(data));
+					}
+				}
+				if(tipoEntrada.equals("float")) {
+					if(entrada.size() <= 2) {
+						System.out.println(soma.calcula(convertDoubleToFloatWithOutArray(data[0]), convertDoubleToFloatWithOutArray(data[1])));
+					}
+					else {
+						System.out.println(soma.calcula(convertDoubleToFloat(data)));
+					}
+				}
 				
 				break;
 			case 2:
 				
+				interfaces.ICalculadora sub = new Subtracao();
+				
+				if(tipoEntrada.equals("inteiro")) {
+					if(entrada.size() <= 2) {
+						System.out.println(sub.calcula(convertDoubleToIntWithOutArray(data[0]), convertDoubleToIntWithOutArray(data[1])));
+					}
+					else {
+						System.out.println(sub.calcula(convertDoubleToInt(data)));
+					}
+				}
+				if(tipoEntrada.equals("double")) {
+					if(entrada.size() <= 2) {
+						System.out.println(sub.calcula(data[0], data[1]));
+					}
+					else {
+					 System.out.println(sub.calcula(data));
+					}
+				}
+				if(tipoEntrada.equals("float")) {
+					if(entrada.size() <= 2) {
+						System.out.println(sub.calcula(convertDoubleToFloatWithOutArray(data[0]), convertDoubleToFloatWithOutArray(data[1])));
+					}
+					else {
+						System.out.println(sub.calcula(convertDoubleToFloat(data)));
+					}
+				}
+				
 				break;
 			case 3:
-				Double data3[] = new Double[entrada.size()];
-				
-				for (double i = 0; i < entrada.size(); i++) {
-					for (double i3 = 0; i3 < entrada.size(); i3++) {
-						data3[(int) i3] = entrada.get((int) i3 );
+				interfaces.ICalculadora div = new Divisão();
+				if(tipoEntrada.equals("inteiro")) {
+					if(entrada.size() <= 2) {
+						System.out.println(div.calcula(convertDoubleToIntWithOutArray(data[0]), convertDoubleToIntWithOutArray(data[1])));
+					}
+					else {
+						System.out.println(div.calcula(convertDoubleToInt(data)));
+					}
+				}
+				if(tipoEntrada.equals("double")) {
+					if(entrada.size() <= 2) {
+						System.out.println(div.calcula(data[0], data[1]));
+					}
+					else {
+					 System.out.println(div.calcula(data));
+					}
+				}
+				if(tipoEntrada.equals("float")) {
+					if(entrada.size() <= 2) {
+						System.out.println(div.calcula(convertDoubleToFloatWithOutArray(data[0]), convertDoubleToFloatWithOutArray(data[1])));
+					}
+					else {
+						System.out.println(div.calcula(convertDoubleToFloat(data)));
+					}
 				}
 				
-				System.out.println(verificaTipoEntrada(data3));				
-				
-				Divis�o d3 = new Divis�o();
-				System.out.println(d3.calcula(data3));
 				break;
-				}
 			case 4:
+				ICalculadora multi = (ICalculadora) new multiplicacao();
+				
+				if(tipoEntrada.equals("inteiro")) {
+					if(entrada.size() <= 2) {
+						System.out.println(multi.calcula(convertDoubleToIntWithOutArray(data[0]), convertDoubleToIntWithOutArray(data[1])));
+					}
+					else {
+						System.out.println(multi.calcula(convertDoubleToInt(data)));
+					}
+				}
+				if(tipoEntrada.equals("double")) {
+					if(entrada.size() <= 2) {
+						System.out.println(multi.calcula(data[0], data[1]));
+					}
+					else {
+					 System.out.println(multi.calcula(data));
+					}
+				}
+				if(tipoEntrada.equals("float")) {
+					if(entrada.size() <= 2) {
+						System.out.println(multi.calcula(convertDoubleToFloatWithOutArray(data[0]), convertDoubleToFloatWithOutArray(data[1])));
+					}
+					else {
+						System.out.println(multi.calcula(convertDoubleToFloat(data)));
+					}
+				}
 				
 				break;
 			default:
@@ -57,17 +151,9 @@ public class ExemploPrograma {
 			}
 		} while (opc != 0);
 		
-//		Exemplo das chamadas que deverão ser feitas
-//		ICalculadora calculadora = new Soma();
-//		ICalculadora calculadora = new Subtracao();
-//		ICalculadora calculadora = new Divisao();
-//		ICalculadora calculadora = new Multiplicacao();
-//		
-//		calculadora.calcular(null);
-		
-		
 	}
 	
+	@SuppressWarnings("resource")
 	public static Integer menu() {
 		Scanner scan = new Scanner(System.in);
 		StringBuilder sb = new StringBuilder();
@@ -82,13 +168,17 @@ public class ExemploPrograma {
 		
 		System.out.println(sb.toString());
 		Integer opc = scan.nextInt();
+		if(opc == 0) {
+			System.exit(0);
+		}
 		return opc;
 	}
 	
+	@SuppressWarnings("resource")
 	public static ArrayList<Double> menuEntradaDados() {
 		ArrayList<Double> entrada = new ArrayList<>();
 		Scanner scan = new Scanner(System.in);
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new Stri1ngBuilder();
 		sb.append("===================================\n");
 		sb.append("=========  Entrada de Dados   =====\n");
 		sb.append("===================================\n");
@@ -100,7 +190,7 @@ public class ExemploPrograma {
 				entrada.add(scan.nextDouble());
 			}			
 			if (entrada.size() >= 2) {
-				System.out.println("Você deseja iserir mais número? [0 - SIM | 1 - NÃO]");
+				System.out.println("Você deseja inserir mais número? [0 - SIM | 1 - NÃO]");
 				usuarioQuerContinuar = scan.nextInt();
 			}
 			
@@ -110,9 +200,6 @@ public class ExemploPrograma {
 	}
 	
 	public static String verificaTipoEntrada(Double[] entrada) {
-		// se todos forem inteiros deve retornar inteiro
-		// se todos forem float devem retornar float
-		// todos os outros casos devem retornar double
 		Integer numeroEntradaInteiros = 0;
 		Integer numeroEntradaFloat = 0;
 		Integer numeroEntradaDouble = 0;
@@ -138,5 +225,31 @@ public class ExemploPrograma {
 		}
 		
 		return "double";
+	}
+	
+	public static Integer[] convertDoubleToInt(Double[] array) {
+	    Integer[] arr = new Integer[array.length];
+	    for (int i = 0; i < array.length; i++) {
+	        arr[i] = (int) array[i].doubleValue();
+	    }
+	    return arr;
+	}
+	
+	public static Integer convertDoubleToIntWithOutArray(Double db) {
+	    Integer nmInt = (int) db.doubleValue();
+	    return nmInt;
+	}
+	
+	public static Float[] convertDoubleToFloat(Double[] array) {
+	    Float[] arr = new Float[array.length];
+	    for (int i = 0; i < array.length; i++) {
+	        arr[i] = Float.parseFloat(array[i].toString());
+	    }
+	    return arr;
+	}
+	
+	public static Float convertDoubleToFloatWithOutArray(Double db) {
+		Float nmFloat = Float.parseFloat(db.toString());
+	    return nmFloat;
 	}
 }
